@@ -1,0 +1,49 @@
+=== header  #2 ===
+#header2 {
+	position: relative;
+	min-width: 100vw;
+	min-height: 95vh;
+	background-color: #ddd;
+	z-index: 0;
+}
+#header2 .box {
+	position: absolute;
+	content: '';
+	width: 25%;
+	height: 50%;
+	top: 15%;
+	left: 50%;
+	transform:translate(-30%, 0%);
+  z-index: 1;
+  border: 10px solid #000;
+}
+#header2 .caption {
+	position: absolute;
+	top: 20%;
+	left: 50%;
+	transform:translate(-10%, 0%);
+  color: #000;
+  font-weight: 600;
+  font-size: 6rem; 
+  background-color: #ddd;
+  z-index: 2;
+  padding: 10px;
+}
+#header2 img {
+	position: absolute;
+	top: 20%;
+	left: 20%;
+	height: 70%;
+	z-index: 3;
+}
+#header2 .action {
+	position: absolute;
+	top: 75%;
+	left: 55%;
+	transform:translate(-50%,-50%);
+  text-align: center;
+  z-index: 4;
+  padding-right: 25px;
+  padding-left: 25px; 
+   	
+}

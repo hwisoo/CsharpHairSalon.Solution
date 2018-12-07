@@ -3,13 +3,25 @@
 }
 
 <h2 class="text-center">Add Stylist</h2>
-<div class="container">
+<div class="container ml-5">
+  <div class="row">
 
-
-    <form action="/stylists/new" method="post">
-    <label for="stylistName">Name: </label>
-    <input type="text" name="stylistName"><br>
- 
+    <form class="form-group" action="/stylists/new" method="post">
+    <div class="col">
+      <label for="stylistName">Name: </label>
+      <input class="form-control" type="text" name="stylistName"><br>
+    </div>
+    <div class="col">
+      <label for="stylistSpecialty">Specialty: </label>
+      <input class="form-control" type="text" name="stylistSpecialty"><br>
+    </div>
+    <div class="col">
+      <label for="stylistSchedule">Work Schedule: </label>
+      <input class="form-control" type="text" name="stylistSchedule"><br>
+    </div>
+    <div class="col">
     <button type="submit" class="btn btn-lg btn-dark">Add</button>
+    </div>
     </form>
+  </div>
 </div>
