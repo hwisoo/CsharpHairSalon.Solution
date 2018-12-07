@@ -7,12 +7,14 @@
 
 <form action="/stylists/@Model["stylist"].GetId()/clients/@Model["client"].GetId()" method="post">
   <label for="newName">Name:</label>
-  <input type="text" name="newName" value="@Model["client"].GetName()">
-  <button type="submit">Edit</button>
+  <input class="form-control" type="text" name="newName" value="@Model["client"].GetName()">
+   <label for="newName">Phone:</label>
+  <input class="form-control" type="number" name="newPhone" value="@Model["client"].GetPhone()">
+  <button class="btn btn-lg btn-warning text-white mt-2 mb-2" type="submit">Edit</button>
 </form>
 
 
 
-<h4><a href="/stylists/@Model["stylist"].GetId()/clients/@Model["client"].GetId()">Return to previous page</a></h4>
+<a href="/stylists/@Model["stylist"].GetId()/clients/@Model["client"].GetId()"><button class="btn btn-dark">Back to previous page</button></a>
 
 </div>

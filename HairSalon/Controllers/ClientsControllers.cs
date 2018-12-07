@@ -51,12 +51,12 @@ namespace HairSalon.Controllers
     }
     
     [HttpPost("/stylists/{stylistId}/clients/{clientId}")]
-    public ActionResult Update(int stylistId, int clientId, string newName, int newPhone, int newStylistId)
+    public ActionResult Update(int stylistId, int clientId, string newName, int newPhone)
     {
       Client client= Client.Find(clientId);
-      client.Edit(newName, newPhone, newStylistId);
+      client.Edit(newName, newPhone);
       Dictionary<string, object> model = new Dictionary<string, object>();
-      Stylist stylist = Stylist.Find(newStylistId);
+      Stylist stylist = Stylist.Find(stylistId);
       model.Add("stylist", stylist);
       model.Add("client", client);
       return View("Show", model);
