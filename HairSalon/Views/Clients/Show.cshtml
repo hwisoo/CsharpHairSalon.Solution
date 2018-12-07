@@ -4,8 +4,8 @@
 <div class="container">
   <h2 class="mb-3">Client Details: </h2>
 
-  <h3>Client Name: @Model["client"].GetName()</h3>
-  <h4>Phone Number: @Model["client"].GetPhone()</h4>
+  <h3>Client Name: <span class="special">@Model["client"].GetName()</span></h3>
+  <h4>Phone Number: <span class="special">@Model["client"].GetPhone()</span></h4>
   <h4>Stylist: @Model["stylist"].GetName()</h4>
 
   <a href='/stylists/@Model["stylist"].GetId()/clients/@Model["client"].GetId()/edit'><button class="btn btn-sm btn-warning text-white mb-2">Edit Client Info</button></a><br>
