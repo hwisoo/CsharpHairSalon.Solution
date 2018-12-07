@@ -1,8 +1,13 @@
 @{
   Layout = "_Layout";
 }
+<div class="container">
+<h2>@Model["stylist"].GetName()'s details: </h2>
+<h4>Name: @Model["stylist"].GetName()</h4>
+<h4>@Model["stylist"].GetName()'s specialty: @Model["stylist"].GetSpecialty()</h4>
+<h4>@Model["stylist"].GetName()'s work schedule: @Model["stylist"].GetSchedule()</h4><br>
 
-<h3>Here are all the clients for @Model["stylist"].GetName() :</h3>
+<h2>Here are all the clients for<span class="stylist"> @Model["stylist"].GetName() : </span></h2>
 @if (@Model["clients"].Count == 0)
 {
   <h3>@Model["stylist"].GetName() doesn't have any clients added!</h3>
@@ -11,9 +16,10 @@
 <ul>
 @foreach (var client in @Model["clients"])
 {
-  <li><a href='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()'>@client.GetName()</a>
-  <p><a href="/stylists/@Model["stylist"].GetId()/clients/@client.GetId()/delete" >Delete This Client</a></p>
+  <li><h3><a href='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()'>@client.GetName()</a></h3>
+  <a href="/stylists/@Model["stylist"].GetId()/clients/@client.GetId()/delete" ><button class="btn btn-sm btn-danger">Delete Client</button></a>
   </li>
+  <br>
 }
 </ul>
 
@@ -21,3 +27,4 @@
 
 <p><a href='/stylists'>Return to Stylists list</a></p>
 <p><a href='/'>Return to Main Page</a></p>
+</div>

@@ -23,6 +23,10 @@ namespace HairSalon.Models
       return _name;
     }
 
+    public int GetPhone()
+    {
+      return _phone;
+    }
 
     public int GetId()
     {
@@ -59,7 +63,7 @@ namespace HairSalon.Models
       return allClients;
     }
 
-    public static List<Client> GetAllStylistClients(int id)
+    public static List<Client> GetStylistClients(int id)
     {
       List<Client> stylistClients = new List<Client> {};
       MySqlConnection conn = DB.Connection();
@@ -171,7 +175,7 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO clients (name, phone,id, stylist_id) VALUES (@name, @phone, @id, @stylist_id);";
+      cmd.CommandText = @"INSERT INTO clients (name, phone,stylist_id) VALUES (@name, @phone, @stylist_id);";
       MySqlParameter name = new MySqlParameter();
       name.ParameterName = "@name";
       name.Value = this._name;
