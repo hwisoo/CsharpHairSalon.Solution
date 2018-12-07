@@ -7,15 +7,15 @@ namespace HairSalon.Models
   {
     private string _name;
     private int _phone;
-    private int _id;
     private int _stylistId;
+    private int _id;
 
-    public Client (string name, int phone, int id = 0, int stylistId)
+    public Client (string name, int phone, int stylistId,int id = 0)
     {
       _name = name;
       _phone = phone;
-      _id = id;
       _stylistId = stylistId;
+      _id = id;
     }
 
     public string GetName()
@@ -128,9 +128,12 @@ namespace HairSalon.Models
       searchId.Value = id;
       cmd.Parameters.Add(searchId);
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
-      int clientId = 0;
+     
       string clientName = "";
+      int clientPhone = 0;
       int clientStylistId = 0;
+      int clientId = 0;
+
       while(rdr.Read())
       {
         clientName = rdr.GetString(0);
@@ -217,10 +220,9 @@ namespace HairSalon.Models
       cmd.Parameters.Add(clientStylistId);
 
       cmd.ExecuteNonQuery();
-      _name = name;
-      _phone = phone;
-      _id = id;
-      _stylistId = stylistId;
+      _name = newName;
+      _phone = newPhone;
+      _stylistId = newStylistId;
       conn.Close();
       if (conn != null)
       {
