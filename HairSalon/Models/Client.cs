@@ -69,7 +69,7 @@ namespace HairSalon.Models
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
       while(rdr.Read())
       {
-         string clientName = rdr.GetString(0);
+        string clientName = rdr.GetString(0);
         int clientPhone = rdr.GetInt32(1);
         int clientId = rdr.GetInt32(2);
         int stylistId = rdr.GetInt32(3);
@@ -117,7 +117,7 @@ namespace HairSalon.Models
       }
     }
 
-    public static Item Find(int id)
+    public static Client Find(int id)
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
@@ -128,37 +128,38 @@ namespace HairSalon.Models
       searchId.Value = id;
       cmd.Parameters.Add(searchId);
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
-      int itemId = 0;
-      string itemName = "";
-      int itemCategoryId = 0;
+      int clientId = 0;
+      string clientName = "";
+      int clientStylistId = 0;
       while(rdr.Read())
       {
-        itemId = rdr.GetInt32(0);
-        itemName = rdr.GetString(1);
-        itemCategoryId = rdr.GetInt32(2);
+        clientName = rdr.GetString(0);
+        clientPhone = rdr.GetInt32(1);
+        clientId = rdr.GetInt32(2);
+        clientStylistId = rdr.GetInt32(3);
       }
-      Item newItem = new Item(itemName, itemCategoryId, itemId);
+      Client newClient = new Client(clientName, clientPhone, clientId, clientStylistId);
       conn.Close();
       if (conn != null)
       {
         conn.Dispose();
       }
-      return newItem;
+      return newClient;
     }
 
-    public override bool Equals(System.Object otherItem)
+    public override bool Equals(System.Object otherClient)
     {
-      if (!(otherItem is Item))
+      if (!(otherClient is Client))
       {
         return false;
       }
       else
       {
-         Item newItem = (Item) otherItem;
-         bool idEquality = this.GetId() == newItem.GetId();
-         bool descriptionEquality = this.GetDescription() == newItem.GetDescription();
-         bool categoryEquality = this.GetCategoryId() == newItem.GetCategoryId();
-         return (idEquality && descriptionEquality && categoryEquality);
+         Client newClient = (Client) otherClient;
+         bool idEquality = this.GetId() == newClient.GetId();
+         bool nameEquality = this.GetName() == newClient.GetName();
+         bool stylistEquality = this.GetStylistId() == newClient.GetStylistId();
+         return (idEquality && nameEquality && stylistEquality);
        }
     }
 
@@ -167,15 +168,19 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO items (description, category_id) VALUES (@description, @category_id);";
-      MySqlParameter description = new MySqlParameter();
-      description.ParameterName = "@description";
-      description.Value = this._description;
-      cmd.Parameters.Add(description);
-      MySqlParameter categoryId = new MySqlParameter();
-      categoryId.ParameterName = "@category_id";
-      categoryId.Value = this._categoryId;
-      cmd.Parameters.Add(categoryId);
+      cmd.CommandText = @"INSERT INTO clients (name, phone,id, stylist_id) VALUES (@name, @phone, @id, @stylist_id);";
+      MySqlParameter name = new MySqlParameter();
+      name.ParameterName = "@name";
+      name.Value = this._name;
+      cmd.Parameters.Add(name);
+      MySqlParameter phone = new MySqlParameter();
+      phone.ParameterName = "@phone";
+      phone.Value = this._phone;
+      cmd.Parameters.Add(phone);
+      MySqlParameter stylistId = new MySqlParameter();
+      stylistId.ParameterName = "@stylist_id";
+      stylistId.Value = this._stylistId;
+      cmd.Parameters.Add(stylistId);
       cmd.ExecuteNonQuery();
       _id = (int) cmd.LastInsertedId;
       conn.Close();
@@ -185,22 +190,37 @@ namespace HairSalon.Models
       }
     }
 
-    public void Edit(string newDescription)
+    public void Edit(string newName, int newPhone, int newStylistId)
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"UPDATE items SET description = @newDescription WHERE id = @searchId;";
+      cmd.CommandText = @"UPDATE clients SET name = @newName, newPhone = @newPhone, newStylistId = @newStylistId WHERE id = @searchId;";
       MySqlParameter searchId = new MySqlParameter();
       searchId.ParameterName = "@searchId";
       searchId.Value = _id;
       cmd.Parameters.Add(searchId);
-      MySqlParameter description = new MySqlParameter();
-      description.ParameterName = "@newDescription";
-      description.Value = newDescription;
-      cmd.Parameters.Add(description);
+
+      MySqlParameter clientName = new MySqlParameter();
+      clientName.ParameterName = "@newName";
+      clientName.Value = newName;
+      cmd.Parameters.Add(clientName);
+
+      MySqlParameter clientPhone = new MySqlParameter();
+      clientPhone.ParameterName = "@newPhone";
+      clientPhone.Value = newPhone;
+      cmd.Parameters.Add(clientPhone);
+
+      MySqlParameter clientStylistId = new MySqlParameter();
+      clientStylistId.ParameterName = "@newStylistId";
+      clientStylistId.Value = newStylistId;
+      cmd.Parameters.Add(clientStylistId);
+
       cmd.ExecuteNonQuery();
-      _description = newDescription; // <--- This line is new!
+      _name = name;
+      _phone = phone;
+      _id = id;
+      _stylistId = stylistId;
       conn.Close();
       if (conn != null)
       {
