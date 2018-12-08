@@ -19,7 +19,7 @@
 }
 #header2 .caption {
 	position: absolute;
-	top: 22%;
+	top: 25%;
 	left: 10%;
 	transform:translate(-10%, 0%);
   color: #000;
@@ -47,7 +47,9 @@
   padding-left: 25px; 
    	
 }
-
+.caption, #header{
+  font-family: 'Molle', cursive;
+}
 .special{
   color: #007bff;
 }
