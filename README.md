@@ -25,6 +25,9 @@ Download .NET Core 2.1.3 SDK and .NET Core Runtime 2.0.9 and install them. Downl
 * Clone this repository: $ git clone https://github.com/hwisoo/CsharpHairSalon.Solution.git
 * Change into the work directory:: $ cd CsharpHairSalon.Solution
 To edit the project, open the project in your preferred text editor.
+* Find james_cho.sql and james_cho_test.sql files in the top level of the project directory.
+* Setup and Run MAMP. On the Starting page, click on the 'Tools' tab and open 'PHPMYADMIN'.
+* Click on the 'Import' tab and follow instructions to import james_cho.sql and james_cho_test.sql files into the current server.
 
 * To run the program, first navigate to the location of the Program.cs file then run these commands: $ dotnet restore $ dotnet build $ dotnet run
 
