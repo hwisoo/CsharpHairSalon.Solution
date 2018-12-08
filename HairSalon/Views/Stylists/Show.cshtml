@@ -16,7 +16,7 @@
 <ul>
 @if(@Model["clients"].Count > 0)
 {
-  <h2>Here are all the clients for<span class="special"> @Model["stylist"].GetName() : </span></h2>
+  <h2>Here are all the clients for<span class="special"> @Model["stylist"].GetName()  </span> :</h2>
 @foreach (var client in @Model["clients"])
 {
   <li><h3 class="special"><a href='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()'>@client.GetName()</a></h3>

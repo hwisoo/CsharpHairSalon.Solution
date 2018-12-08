@@ -1,4 +1,6 @@
-
+#header {
+	font-size: 5rem;
+}
 #header2 {
 	position: relative;
 	min-width: 100vw;
