@@ -13,7 +13,7 @@
     @foreach (var stylist in Model)
     {
     <div class="col col-md-3 mb-5">
-    <h2><a href='/stylists/@stylist.GetId()'>@stylist.GetName()</a></h2>
+    <h2 class="special"><a href='/stylists/@stylist.GetId()'>@stylist.GetName()</a></h2>
     <a href="/stylists/@stylist.GetId()/delete"><button class="btn btn-sm btn-danger">Delete Stylist</button></a>
     </div>  
     }

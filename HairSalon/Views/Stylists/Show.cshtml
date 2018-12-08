@@ -1,7 +1,7 @@
 @{
   Layout = "_Layout";
 }
-<div class="container mt-4">
+<div class="container mt-3">
 <h2><span class="special">@Model["stylist"].GetName()</span>'s details: </h2><br>
 <h4>Name: <span class="special">@Model["stylist"].GetName()</span></h4>
 <h4>@Model["stylist"].GetName()'s specialty: <span class="special">@Model["stylist"].GetSpecialty()</span></h4>
@@ -19,7 +19,7 @@
   <h2>Here are all the clients for<span class="special"> @Model["stylist"].GetName() : </span></h2>
 @foreach (var client in @Model["clients"])
 {
-  <li><h3><a href='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()'>@client.GetName()</a></h3>
+  <li><h3 class="special"><a href='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()'>@client.GetName()</a></h3>
   <a href="/stylists/@Model["stylist"].GetId()/clients/@client.GetId()/delete" ><button class="btn btn-sm btn-danger">Delete Client</button></a>
   </li>
   <br>
