@@ -43,57 +43,66 @@ namespace HairSalon.Tests
       Assert.AreEqual(name, result);
     }
 
-    // [TestMethod]
-    // public void Add_CuisineList_To_Database()
-    // {
-    //     //Arrange
-    //     string name = "Indian";
-    //     Cuisine newCuisine = new Cuisine(name);
-    //     newCuisine.Save();
-    //     List<Cuisine> newList = new List<Cuisine> {newCuisine};
+    [TestMethod]
+    public void Add_StylistList_To_Database()
+    {
+        //Arrange
+        string name = "Vidal Sassoon";
+        string specialty = "haircuts";
+        string schedule = "weekdays";
+        int id = 0;
+        Stylist newStylist = new Stylist(name, specialty, schedule, id);
+        newStylist.Save();
+        List<Stylist> newList = new List<Stylist> {newStylist};
 
-    //     //Act
-    //    List<Cuisine> result = Cuisine.GetAll();
+        //Act
+       List<Stylist> result = Stylist.GetAll();
 
-    //    //Assert
-    //    CollectionAssert.AreEqual(newList, result);
-    // }
+       //Assert
+       CollectionAssert.AreEqual(newList, result);
+    }
 
-    // [TestMethod]
-    // public void Delete_Cuisine_From_Database()
-    // {
-    //     //Arrange
-    //     string name = "Indian";
-    //     Cuisine newCuisine = new Cuisine(name);
-    //     newCuisine.Save();
-    //     Cuisine.DeleteCuisine(newCuisine.GetId());
+    [TestMethod]
+    public void Delete_Stylist_From_Database()
+    {
+        //Arrange
+        string name = "Vidal Sassoon";
+        string specialty = "haircuts";
+        string schedule = "weekdays";
+        int id = 0;
+        Stylist newStylist = new Stylist(name, specialty, schedule, id);
+        newStylist.Save();
+        Stylist.DeleteStylist(newStylist.GetId());
 
-    //     //Act
-    //     List<Cuisine> result = Cuisine.GetAll();
-    //     List<Cuisine> testList = new List<Cuisine>{};
+        //Act
+        List<Stylist> result = Stylist.GetAll();
+        List<Stylist> testList = new List<Stylist>{};
 
-    //     //Assert
-    //     CollectionAssert.AreEqual(result, testList);
+        //Assert
+        CollectionAssert.AreEqual(result, testList);
         
-    // }
+    }
 
-    // [TestMethod]
-    // public void Add_Restaurants_To_Cuisine_List()
-    // {
-    //     //Arrange
-    //      Cuisine newCuisine = new Cuisine("Seafood");
-    //      newCuisine.Save();
-    //      Restaurant testRestaurant = new Restaurant("Bob's", "Seaside seafood restaurant", "Seattle", "Seafood");
-    //      testRestaurant.Save();
-    //      Restaurant testRestaurant2 = new Restaurant("Jim's", "local seafood restaurant", "Seattle", "Indian");
-    //     testRestaurant2.Save();
-    //      //Act
-    //      string cuisineList = newCuisine.GetCuisineType();
-    //      string result = testRestaurant.GetCuisineType();
+    [TestMethod]
+    public void Add_Clients_To_Stylist_List()
+    {
+        //Arrange
+        string name = "Vidal Sassoon";
+        string specialty = "haircuts";
+        string schedule = "weekdays";
+        int id = 0;
+        Stylist newStylist = new Stylist(name, specialty, schedule, id);
+        newStylist.Save();
+        Client testClient = new Client("Bob", 7777777, newStylist.GetId(), 1);
+        testClient.Save();
+        
+         //Act
+        int stylistId = newStylist.GetId();
+        int result = testClient.GetStylistId();
 
-    //      //Assert
-    //      Assert.AreEqual(cuisineList,result);
+         //Assert
+         Assert.AreEqual(stylistId,result);
    }
 
-  
+  }
 }
