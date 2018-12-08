@@ -1,4 +1,4 @@
-/*=== header  #2 ===*/
+
 #header2 {
 	position: relative;
 	min-width: 100vw;
@@ -51,5 +51,6 @@
   font-family: 'Molle', cursive;
 }
 .special{
+	font-family: 'Molle', cursive;
   color: #007bff;
 }
