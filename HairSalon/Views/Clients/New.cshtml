@@ -1,14 +1,26 @@
 @{
   Layout = "_Layout";
 }
-
-<h1>Add a new client for @Model.GetName()</h1>
-
-<form action='/stylists/@Model.GetId()/clients' method='post'>
-  <input id='stylistId' name='stylistId' type='hidden' value='@Model.GetId()'>
-  <label for='clientName'>Client Name: </label>
-  <input id='clientName' name='clientName' type='text'>
-  <label for='clientPhone'>Client Phone: </label>
-  <input id='clientPhone' name='clientPhone' type='number'>
-  <button type='submit'>Add Client</button>
-</form>
+<div class="container">
+<h2 class="mt-3">Add a new client for <span class="special h1">@Model.GetName()</span></h2>
+  <div class="row">
+    <form class="form-group" action='/stylists/@Model.GetId()/clients' method='post'>
+      
+      <input class="form-control" id='stylistId' name='stylistId' type='hidden' value='@Model.GetId()'>
+      <div class="col font-weight-bold">
+      <label for='clientName'>Client Name: </label>
+      <input class="form-control" id='clientName' name='clientName' type='text'>
+      </div>
+      <div class="col font-weight-bold">
+      <label for='clientPhone'>Client Phone: </label>
+      <input class="form-control" id='clientPhone' name='clientPhone' type='number'>
+      </div>
+      <button class="btn btn-lg btn-primary mt-3 ml-3" type='submit'>Add Client</button><br>
+      </form><br>
+    </div>
+      <a href='/stylists'><button class="btn btn-dark btn-lg mb-2">Back to Stylists</button></a><br>
+    <a href='/'><button class="btn btn-dark btn-lg mb-2">Back to Main </button></a>
+    
+    
+  
+</div>
