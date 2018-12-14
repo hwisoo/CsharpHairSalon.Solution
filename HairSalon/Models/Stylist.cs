@@ -8,15 +8,13 @@ namespace HairSalon.Models
     public class Stylist
     {
     private string _name;
-    private string _specialty;
     private string _schedule;
     private int _id;
 
-    public Stylist(string name, string specialty, string schedule, int id = 0)
+    public Stylist(string name, string schedule, int id = 0)
     {
     
       _name = name;
-      _specialty = specialty;
       _schedule = schedule;
       _id = id;
     }
@@ -24,11 +22,6 @@ namespace HairSalon.Models
     public string GetName()
     {
       return _name;
-    }
-
-    public string GetSpecialty()
-    {
-        return _specialty;
     }
 
     public string GetSchedule()
@@ -68,10 +61,9 @@ namespace HairSalon.Models
       while(rdr.Read())
       {
         string stylistName = rdr.GetString(0);
-        string stylistSpecialty = rdr.GetString(1);
-        string stylistSchedule = rdr.GetString(2);
-        int stylistId = rdr.GetInt32(3);
-        Stylist newStylist = new Stylist(stylistName, stylistSpecialty, stylistSchedule, stylistId);
+        string stylistSchedule = rdr.GetString(1);
+        int stylistId = rdr.GetInt32(2);
+        Stylist newStylist = new Stylist(stylistName, stylistSchedule, stylistId);
         allStylists.Add(newStylist);
       }
       conn.Close();
@@ -95,16 +87,14 @@ namespace HairSalon.Models
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
       int stylistId = 0;
       string stylistName = "";
-      string stylistSpecialty = "";
       string stylistSchedule = "";
       while(rdr.Read())
       {
         stylistName = rdr.GetString(0);
-        stylistSpecialty = rdr.GetString(1);
-        stylistSchedule = rdr.GetString(2);
-        stylistId = rdr.GetInt32(3);
+        stylistSchedule = rdr.GetString(1);
+        stylistId = rdr.GetInt32(2);
       }
-      Stylist foundStylist = new Stylist(stylistName, stylistSpecialty, stylistSchedule, stylistId);
+      Stylist foundStylist = new Stylist(stylistName, stylistSchedule, stylistId);
       conn.Close();
       if (conn != null)
       {
@@ -163,16 +153,11 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO stylists (name, specialty, schedule) VALUES (@stylistName, @stylistSpecialty, @stylistSchedule);";
+      cmd.CommandText = @"INSERT INTO stylists (name, schedule) VALUES (@stylistName, @stylistSchedule);";
       MySqlParameter stylistName = new MySqlParameter();
       stylistName.ParameterName = "@stylistName";
       stylistName.Value = this._name;
       cmd.Parameters.Add(stylistName);
-
-      MySqlParameter stylistSpecialty = new MySqlParameter();
-      stylistSpecialty.ParameterName = "@stylistSpecialty";
-      stylistSpecialty.Value = this._specialty;
-      cmd.Parameters.Add(stylistSpecialty);
 
       MySqlParameter stylistSchedule = new MySqlParameter();
       stylistSchedule.ParameterName = "@stylistSchedule";
@@ -204,6 +189,33 @@ namespace HairSalon.Models
       if (conn != null)
       {
        conn.Dispose();
+      }
+    }
+
+    public void Edit(string newName)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"UPDATE stylists SET name = @newName WHERE id = @searchId;";
+      MySqlParameter searchId = new MySqlParameter();
+      searchId.ParameterName = "@searchId";
+      searchId.Value = _id;
+      cmd.Parameters.Add(searchId);
+      MySqlParameter name = new MySqlParameter();
+      name.ParameterName = "@newName";
+      name.Value = newName;
+      cmd.Parameters.Add(name);
+      MySqlParameter schedule = new MySqlParameter();
+      schedule.ParameterName = "@schedule";
+      schedule.Value = _schedule;
+      cmd.Parameters.Add(schedule);
+      cmd.ExecuteNonQuery();
+      _name = newName;
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
       }
     }
     }

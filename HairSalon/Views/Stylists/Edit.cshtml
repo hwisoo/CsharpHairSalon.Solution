@@ -2,21 +2,18 @@
   Layout = "_Layout";
 }
 
-<h2 class="text-center mt-4">Add Stylist</h2>
+<h2 class="text-center mt-4">Edit Stylist</h2>
 <div class="container ml-5">
   <div class="row">
 
     <form class="form-group" action="/stylists/new" method="post">
     <div class="col font-weight-bold">
-      <label for="stylistName">Name: </label>
-      <input class="form-control" type="text" name="stylistName" required><br>
+      <label for="stylistName">Edit Name: </label>
+      <input class="form-control" type="text" name="stylistName" required placeholder="@Model.GetName()"><br>
     </div>
-    <div class="col font-weight-bold">
-      <label for="stylistSchedule">Work Schedule: </label>
-      <input class="form-control" type="text" name="stylistSchedule" required><br>
-    </div>
+
     <div class="col">
-    <button type="submit" class="btn btn-lg btn-primary">Add</button>
+    <button type="submit" class="btn btn-lg btn-primary">Edit</button>
     </div>
     </form>
   </div>
