@@ -6,7 +6,13 @@
 
   <h4>Client Name: <span class="special">@Model["client"].GetName()</span></h4>
   <h4>Phone Number: <span class="special">@Model["client"].GetPhone()</span></h4>
-  <h4 class="mb-5" >Stylist: <span class="special">@Model["stylist"].GetName()</span></h4>
+  @if(@Model["stylist"].GetId() == 0)
+  {
+    <h4 class="mb-5">This client doesn't have an assigned stylist</h4>
+  }
+  @if(@Model["stylist"].GetId() != 0)
+  {<h4 class="mb-5" >Stylist: <span class="special">@Model["stylist"].GetName()</span></h4>
+  }
 
   <a href='/stylists/@Model["stylist"].GetId()/clients/@Model["client"].GetId()/edit'><button class="btn btn-sm btn-warning text-white mb-2">Edit Client Info</button></a><br>
   <a href='/stylists/@Model["stylist"].GetId()/clients/new'><button class="btn btn-sm btn-primary text-white mb-2">Add another Client</button></a><br>
