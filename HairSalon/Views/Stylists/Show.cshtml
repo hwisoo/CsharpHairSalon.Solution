@@ -42,7 +42,8 @@
                 <form action = "/stylists/@Model["stylist"].GetId()/removeSpecialty" method = "post">
                 <input type = "text" name="stylistId" value =@Model["stylist"].GetId() hidden>
                 <input type = "text" name="specialtyId" value =@specialty.GetId() hidden>
-             <li> @specialty.GetName()</li>  <button class="btn btn-sm btn-info" type = "submit">Remove Specialty</button>
+             <a href="/specialties/@specialty.GetId()"><li> @specialty.GetName()</li></a>  
+             <button class="btn btn-sm btn-info" type = "submit">Remove Specialty</button>
              </form>
                 }
             }
