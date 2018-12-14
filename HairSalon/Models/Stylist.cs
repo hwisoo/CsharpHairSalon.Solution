@@ -5,15 +5,15 @@ using HairSalon;
 
 namespace HairSalon.Models
 {
-    public class Stylist
-    {
+  public class Stylist
+  {
     private string _name;
     private string _schedule;
     private int _id;
 
     public Stylist(string name, string schedule, int id = 0)
     {
-    
+
       _name = name;
       _schedule = schedule;
       _id = id;
@@ -26,7 +26,7 @@ namespace HairSalon.Models
 
     public string GetSchedule()
     {
-        return _schedule;
+      return _schedule;
     }
 
     public int GetId()
@@ -34,7 +34,7 @@ namespace HairSalon.Models
       return _id;
     }
 
-    
+
 
     public static void ClearAll()
     {
@@ -52,13 +52,13 @@ namespace HairSalon.Models
 
     public static List<Stylist> GetAll()
     {
-      List<Stylist> allStylists = new List<Stylist> {};
+      List<Stylist> allStylists = new List<Stylist> { };
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
       cmd.CommandText = @"SELECT * FROM stylists;";
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
-      while(rdr.Read())
+      while (rdr.Read())
       {
         string stylistName = rdr.GetString(0);
         string stylistSchedule = rdr.GetString(1);
@@ -88,7 +88,7 @@ namespace HairSalon.Models
       int stylistId = 0;
       string stylistName = "";
       string stylistSchedule = "";
-      while(rdr.Read())
+      while (rdr.Read())
       {
         stylistName = rdr.GetString(0);
         stylistSchedule = rdr.GetString(1);
@@ -105,7 +105,7 @@ namespace HairSalon.Models
 
     public List<Client> GetClients()
     {
-      List<Client> allStylistClients = new List<Client> {};
+      List<Client> allStylistClients = new List<Client> { };
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
@@ -115,14 +115,14 @@ namespace HairSalon.Models
       stylist_id.Value = this._id;
       cmd.Parameters.Add(stylist_id);
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
-      while(rdr.Read())
+      while (rdr.Read())
       {
         string ClientName = rdr.GetString(0);
         int ClientPhone = rdr.GetInt32(1);
         int ClientStylistId = rdr.GetInt32(2);
         int ClientId = rdr.GetInt32(3);
-        
-        Client newClient = new Client(ClientName,  ClientPhone, ClientStylistId, ClientId);
+
+        Client newClient = new Client(ClientName, ClientPhone, ClientStylistId, ClientId);
         allStylistClients.Add(newClient);
       }
       conn.Close();
@@ -141,7 +141,7 @@ namespace HairSalon.Models
       }
       else
       {
-        Stylist newStylist = (Stylist) otherStylist;
+        Stylist newStylist = (Stylist)otherStylist;
         bool stylistIdEquality = this.GetId().Equals(newStylist.GetId());
         bool stylistNameEquality = this.GetName().Equals(newStylist.GetName());
         return (stylistIdEquality && stylistNameEquality);
@@ -164,7 +164,7 @@ namespace HairSalon.Models
       stylistSchedule.Value = this._schedule;
       cmd.Parameters.Add(stylistSchedule);
       cmd.ExecuteNonQuery();
-      _id = (int) cmd.LastInsertedId;
+      _id = (int)cmd.LastInsertedId;
       conn.Close();
       if (conn != null)
       {
@@ -172,13 +172,13 @@ namespace HairSalon.Models
       }
     }
 
-     public static void DeleteStylist(int id)
+    public static void DeleteStylist(int id)
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
       cmd.CommandText = @"DELETE FROM stylists WHERE id = (@thisId);";
-      
+
       MySqlParameter thisId = new MySqlParameter();
       thisId.ParameterName = "@thisId";
       thisId.Value = id;
@@ -187,7 +187,7 @@ namespace HairSalon.Models
       conn.Close();
       if (conn != null)
       {
-       conn.Dispose();
+        conn.Dispose();
       }
     }
 
@@ -217,5 +217,33 @@ namespace HairSalon.Models
         conn.Dispose();
       }
     }
+
+    public static List<Specialty> GetSpecialties(int id)
+    {
+      List<Specialty> stylistSpecialties = new List<Specialty> { };
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT specialties.* FROM stylists
+                JOIN stylists_specialties on (stylists.id = stylists_specialties.stylist_id)
+                JOIN specialties ON (stylists_specialties.specialty_id = specialties.id)
+                WHERE stylists.id = @StylistId;";
+      cmd.Parameters.AddWithValue("@StylistId", id);
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while (rdr.Read())
+      {  
+        string specialtyName = rdr.GetString(0);
+        int specialtyId = rdr.GetInt32(1);
+
+        Specialty newSpecialty = new Specialty(specialtyName, specialtyId);
+        stylistSpecialties.Add(newSpecialty);
+      }
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      return stylistSpecialties;
     }
+  }
 }
