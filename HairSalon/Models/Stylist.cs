@@ -245,5 +245,46 @@ namespace HairSalon.Models
       }
       return stylistSpecialties;
     }
+
+            public void AddSpecialty(Specialty newSpecialty)
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"INSERT INTO stylists_specialties (stylist_id, specialty_id) VALUES (@StylistId, @SpecialtyId);";
+            MySqlParameter stylist_id = new MySqlParameter();
+            stylist_id.ParameterName = "@StylistId";
+            stylist_id.Value = _id;
+            cmd.Parameters.Add(stylist_id);
+            MySqlParameter specialty_id = new MySqlParameter();
+            specialty_id.ParameterName = "@SpecialtyId";
+            specialty_id.Value = newSpecialty.GetId();
+            cmd.Parameters.Add(specialty_id);
+            cmd.ExecuteNonQuery();
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
+        }
+
+        public void RemoveSpecialty(Specialty specialtyToDelete)
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = 
+             @"DELETE FROM stylists_specialties 
+             WHERE specialty_id = (@SpecialtyId);";
+            MySqlParameter specialtyId = new MySqlParameter();
+            specialtyId.ParameterName = "@SpecialtyId";
+            specialtyId.Value = specialtyToDelete.GetId();
+            cmd.Parameters.Add(specialtyId);
+            cmd.ExecuteNonQuery();
+            if (conn != null)
+            {
+                conn.Close();
+            }
+        }
   }
 }
