@@ -22,7 +22,7 @@ namespace HairSalon.Controllers
     }
     
     [HttpPost("/stylists/new")]
-    public ActionResult Create(string stylistName, string stylistSchedule)
+    public ActionResult Create(string stylistName,string stylistSchedule)
     {
       Stylist newStylist = new Stylist(stylistName, stylistSchedule);
       newStylist.Save();
@@ -70,10 +70,14 @@ namespace HairSalon.Controllers
     [HttpPost("/stylists/{id}/edit")]
     public ActionResult Update(int id, string newName)
     {
+      Dictionary<string, object> model = new Dictionary<string, object>();
       Stylist stylist = Stylist.Find(id);
       stylist.Edit(newName);
-     
-    return View("Show", stylist);
+      stylist = Stylist.Find(id);
+      List<Client> stylistClients = stylist.GetClients();
+      model.Add("stylist", stylist);
+      model.Add("clients", stylistClients);
+    return View("Show", model);
     }
     
     // Adds clients to a stylist

@@ -6,10 +6,10 @@
 <div class="container ml-5">
   <div class="row">
 
-    <form class="form-group" action="/stylists/new" method="post">
+    <form class="form-group" action="/stylists/@Model.GetId()/edit" method="post">
     <div class="col font-weight-bold">
-      <label for="stylistName">Edit Name: </label>
-      <input class="form-control" type="text" name="stylistName" required placeholder="@Model.GetName()"><br>
+      <label for="newName">Edit Name: </label>
+      <input class="form-control" type="text" name="newName" required placeholder="@Model.GetName()"><br>
     </div>
 
     <div class="col">

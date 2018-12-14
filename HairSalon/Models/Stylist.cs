@@ -163,7 +163,6 @@ namespace HairSalon.Models
       stylistSchedule.ParameterName = "@stylistSchedule";
       stylistSchedule.Value = this._schedule;
       cmd.Parameters.Add(stylistSchedule);
-
       cmd.ExecuteNonQuery();
       _id = (int) cmd.LastInsertedId;
       conn.Close();
