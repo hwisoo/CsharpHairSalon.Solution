@@ -40,7 +40,7 @@ namespace HairSalon.Controllers
       return View(model);
     }
     
-    [HttpPost("/clients/delete")]
+    [HttpGet("/clients/delete")]
     public ActionResult DeleteAll()
     {
       Client.ClearAll();
