@@ -1,0 +1,32 @@
+@using HairSalon.Models;
+@using System.Collections.Generic;
+
+@{
+  Layout = "_Layout";
+}
+
+<div class="container">
+    <h2>Specialty: @Model["specialty"].GetName()</h2>
+    <hr>
+    <p>Stylists with this Specialty:</p>
+    <ul>
+        @foreach(var stylist in @Model["specialtyStylists"])
+            {
+             <li class="special"><a href="/stylists/@stylist.GetId()"> @stylist.GetName()</a></li>
+            }
+    </ul>
+    <h4>Add more 
+      Stylists for this Specialty:</h4>
+    <form action = "/specialties/@Model["specialty"].GetId()/addStylist" method = "post">
+        <input type = "text" name="specialtyId" value =@Model["specialty"].GetId() hidden>
+        <label for = "stylistAdded">Choose stylist</label>
+        <select name = "stylistAdded" type = "text"><br>
+            @foreach(var stylist in @Model["allStylists"])
+            {
+                <option value="@stylist.GetId()"> @stylist.GetName() </option>
+            }
+        </select>
+        <button class="btn btn-sm btn-primary" type = "submit"> Add Stylist </button><br>
+    </form>
+    <hr>
+</div>
