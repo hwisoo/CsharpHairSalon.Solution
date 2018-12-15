@@ -17,6 +17,16 @@ A C# program, that allows the user to input stylists into the database and add c
     - Example User Input : ["Mike", 1233456789]
     - The program then constructs a Client object with the corresponding Stylist and saves it to the database.
 
+  * The program takes specialty info from user input including "name".
+    - Example User Input : ["beard trim"]
+    - The program then constructs a Specialty object and saves it to the database.
+
+  * The program allows the user to add stylists to specialties and specialties to stylists
+    - Example : [ specialty: ["beard trim"] , stylists: ["Mike", "Barbara"]]
+    - Example : [ stylist: ["Jim"] , specialties: ["perm", "highlights"]]
+
+    - The program adds connections to a JOIN table and saves it to the database.
+
 
 ## Setup/Installation Requirements
 
@@ -26,13 +36,25 @@ Download .NET Core 2.1.3 SDK and .NET Core Runtime 2.0.9 and install them. Downl
 * Change into the work directory:: $ cd CsharpHairSalon.Solution
 To edit the project, open the project in your preferred text editor.
 * Find james_cho.sql and james_cho_test.sql files in the top level of the project directory.
+* Click on the 'Import' tab and follow instructions to import james_cho.sql and james_cho_test.sql files into the current server.
+
 * Setup and Run MAMP. On the Starting page, click on the 'Tools' tab and open 'PHPMYADMIN'.
 * CREATE DATABASE james_cho;
 * USE james_cho;
 * CREATE TABLE clients (name VARCHAR(255), phone INT(11), stylist_id INT(11), id serial PRIMARY KEY));
-* CREATE TABLE stylists (name VARCHAR(255), specialty VARCHAR(255), schedule VARCHAR(255), id serial PRIMARY KEY);
+* CREATE TABLE stylists (name VARCHAR(255), schedule VARCHAR(255), id serial PRIMARY KEY);
+* CREATE TABLE specialties (name VARCHAR(255) id serial PRIMARY KEY);
+* CREATE TABLE stylists_specialties (stylist_id INT(11), specialty_id INT(11), id serial PRIMARY KEY);
 
-* Click on the 'Import' tab and follow instructions to import james_cho.sql and james_cho_test.sql files into the current server.
+
+* For the test database, Setup and Run MAMP. On the Starting page, click on the 'Tools' tab and open 'PHPMYADMIN'.
+* CREATE DATABASE james_cho_test;
+* USE james_cho_test;
+* CREATE TABLE clients (name VARCHAR(255), phone INT(11), stylist_id INT(11), id serial PRIMARY KEY));
+* CREATE TABLE stylists (name VARCHAR(255), schedule VARCHAR(255), id serial PRIMARY KEY);
+* CREATE TABLE specialties (name VARCHAR(255) id serial PRIMARY KEY);
+* CREATE TABLE stylists_specialties (stylist_id INT(11), specialty_id INT(11), id serial PRIMARY KEY);
+
 
 * To run the program, first navigate to the location of the Program.cs file then run these commands: $ dotnet restore $ dotnet build $ dotnet run
 

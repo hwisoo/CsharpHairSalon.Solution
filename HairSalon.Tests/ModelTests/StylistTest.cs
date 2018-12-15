@@ -31,10 +31,9 @@ namespace HairSalon.Tests
     {
       //Arrange
       string name = "Vidal Sassoon";
-      string specialty = "haircuts";
       string schedule = "weekdays";
       int id = 0;
-      Stylist newStylist = new Stylist(name, specialty, schedule, id);
+      Stylist newStylist = new Stylist(name, schedule, id);
 
       //Act
       string result = newStylist.GetName();
@@ -48,10 +47,9 @@ namespace HairSalon.Tests
     {
         //Arrange
         string name = "Vidal Sassoon";
-        string specialty = "haircuts";
         string schedule = "weekdays";
         int id = 0;
-        Stylist newStylist = new Stylist(name, specialty, schedule, id);
+        Stylist newStylist = new Stylist(name, schedule, id);
         newStylist.Save();
         List<Stylist> newList = new List<Stylist> {newStylist};
 
@@ -67,10 +65,9 @@ namespace HairSalon.Tests
     {
         //Arrange
         string name = "Vidal Sassoon";
-        string specialty = "haircuts";
         string schedule = "weekdays";
         int id = 0;
-        Stylist newStylist = new Stylist(name, specialty, schedule, id);
+        Stylist newStylist = new Stylist(name, schedule, id);
         newStylist.Save();
         Stylist.DeleteStylist(newStylist.GetId());
 
@@ -88,10 +85,9 @@ namespace HairSalon.Tests
     {
         //Arrange
         string name = "Vidal Sassoon";
-        string specialty = "haircuts";
         string schedule = "weekdays";
         int id = 0;
-        Stylist newStylist = new Stylist(name, specialty, schedule, id);
+        Stylist newStylist = new Stylist(name, schedule, id);
         newStylist.Save();
         Client testClient = new Client("Bob", 7777777, newStylist.GetId(), 1);
         testClient.Save();
