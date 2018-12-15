@@ -38,13 +38,14 @@ To edit the project, open the project in your preferred text editor.
 * Find james_cho.sql and james_cho_test.sql files in the top level of the project directory.
 * Click on the 'Import' tab and follow instructions to import james_cho.sql and james_cho_test.sql files into the current server.
 
-* Setup and Run MAMP. On the Starting page, click on the 'Tools' tab and open 'PHPMYADMIN'.
-* CREATE DATABASE james_cho;
-* USE james_cho;
-* CREATE TABLE clients (name VARCHAR(255), phone INT(11), stylist_id INT(11), id serial PRIMARY KEY));
-* CREATE TABLE stylists (name VARCHAR(255), schedule VARCHAR(255), id serial PRIMARY KEY);
-* CREATE TABLE specialties (name VARCHAR(255) id serial PRIMARY KEY);
-* CREATE TABLE stylists_specialties (stylist_id INT(11), specialty_id INT(11), id serial PRIMARY KEY);
+* To setup project database
+- Setup and Run MAMP. On the Starting page, click on the 'Tools' tab and open 'PHPMYADMIN'.
+- CREATE DATABASE james_cho;
+- USE james_cho;
+- CREATE TABLE clients (name VARCHAR(255), phone INT(11), stylist_id INT(11), id serial PRIMARY KEY));
+- CREATE TABLE stylists (name VARCHAR(255), schedule VARCHAR(255), id serial PRIMARY KEY);
+- CREATE TABLE specialties (name VARCHAR(255) id serial PRIMARY KEY);
+- CREATE TABLE stylists_specialties (stylist_id INT(11), specialty_id INT(11), id serial PRIMARY KEY);
 
 
 * For the test database, Setup and Run MAMP. On the Starting page, click on the 'Tools' tab and open 'PHPMYADMIN'.
