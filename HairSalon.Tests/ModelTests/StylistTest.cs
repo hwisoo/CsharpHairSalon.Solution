@@ -22,7 +22,7 @@ namespace HairSalon.Tests
     [TestMethod]
     public void StylistConstructor_CreatesInstanceOfStylist_Stylist()
     {
-      Stylist newStylist = new Stylist("test","test","test");
+      Stylist newStylist = new Stylist("test","test");
       Assert.AreEqual(typeof(Stylist), newStylist.GetType());
     }
 

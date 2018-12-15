@@ -57,9 +57,9 @@ To setup test database
 * CREATE TABLE stylists_specialties (stylist_id INT(11), specialty_id INT(11), id serial PRIMARY KEY);
 
 
-* To run the program, first navigate to the location of the Program.cs file then run these commands: $ dotnet restore $ dotnet build $ dotnet run
+To run the program, first navigate to the location of the Program.cs file then run these commands: $ dotnet restore $ dotnet build $ dotnet run
 
-* To run the tests, use these commands: $ cd HairSalon.Tests $ dotnet test
+To run the tests, use these commands: $ cd HairSalon.Tests $ dotnet test
 
 
 
